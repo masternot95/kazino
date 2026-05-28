@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <ctime>
 
-int Wallet = 1100;
+int wallet = 1100;
 
 class SlotMachine {
 private:
@@ -38,7 +38,7 @@ public:
         if (reward > 0)
         {
             std::cout << "Win: " << reward << std::endl;
-            Wallet = Wallet + reward;
+            wallet += reward;
         }
         else
         {
@@ -50,62 +50,72 @@ public:
 int main() {
     srand(time(0));
     SlotMachine machine;
-    bool show = false;
+    bool continueAfterDebt = false;
+    
     while (true)
     {   
-        Wallet = Wallet - 100;
-        if (Wallet <= 0 && !show)
+        wallet -= 100;
+        
+        if (wallet <= 0 && !continueAfterDebt)
         {
-            char memory_leak;
-            std::cout << "balance: " << Wallet << std::endl;
-            std::cout << "do you want to continue playing? (n/Y): ";
-            std::cin >> memory_leak;
-            if (memory_leak == 'y' || memory_leak == 'Y')
+            char choice;
+            std::cout << "Balance: " << wallet << std::endl;
+            std::cout << "Do you want to continue playing? (n/Y): ";
+            std::cin >> choice;
+            
+            if (choice == 'y' || choice == 'Y')
             {
-                show = true;
-            } else if(memory_leak == 'n' || memory_leak == 'N')
+                continueAfterDebt = true;
+            }
+            else if (choice == 'n' || choice == 'N')
             {
                 break;
             }
-
         }
+        
         machine.spin();
         machine.showResult();
-        std::cout << Wallet << std::endl;
+        std::cout << wallet << std::endl;
 
-        char memory_leak_v_2;
-        std::cout << "(n/y)";
-        std::cin >> memory_leak_v_2;
-        if (memory_leak_v_2 == 'n' || memory_leak_v_2 == 'N')
+        char continueChoice;
+        std::cout << "(n/y): ";
+        std::cin >> continueChoice;
+        
+        if (continueChoice == 'n' || continueChoice == 'N')
         {
             break;
         }
-
     }
-    if (show)
+    
+    if (continueAfterDebt)
     {
-        std::cout << "time to work, did you think it would be that easy?" << std::endl;
-        int debt = Wallet;
+        std::cout << "Time to work, did you think it would be that easy?" << std::endl;
+        int debt = wallet;
+        
         while (true)
         {
-            char you_debt = 'n';
-            std::cout << "agree to the credits: " << std::endl;
-            std::cout << "(n/y)";
-            std::cin >> you_debt;
-            if (you_debt == 'y' || you_debt == 'Y')
+            char creditChoice;
+            std::cout << "Agree to the credits: " << std::endl;
+            std::cout << "(n/y): ";
+            std::cin >> creditChoice;
+            
+            if (creditChoice == 'y' || creditChoice == 'Y')
             {
                 debt += 1;
             }
-            else{
-                std::cout << "no, you must repay your debt to the casino" << std::endl;
+            else
+            {
+                std::cout << "No, you must repay your debt to the casino" << std::endl;
             }
+            
             if (debt >= 100)
             {
-                std::cout << "get out of here" << std::endl;
+                std::cout << "Get out of here" << std::endl;
                 break;
             }
         }
     }
-    std::cout << "bye";
+    
+    std::cout << "Bye";
     return 0;
 }
