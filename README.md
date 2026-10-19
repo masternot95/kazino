@@ -1,3 +1,3 @@
-# kazino
+i# kazino
 
-game kazino for terminal
+game casino for terminal
