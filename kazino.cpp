@@ -11,10 +11,8 @@ private:
     int randomNumber() {
         return rand() % 7 + 2;
     }
-
     int calculateReward() {
         int a = slots[0], b = slots[1], c = slots[2];
-
         if (a == b && b == c) {
             if (a == 7) return 100;
             if (a == 8) return 50;
@@ -28,12 +26,22 @@ private:
 public:
     void spin() {
         for (int i = 0; i < 3; i++) {
-            slots[i] = randomNumber();
+            std::cout << "  " << "_" << " ";
         }
+        std::cout << "\n";
+        for (int i = 0; i < 3; i++) {
+            slots[i] = randomNumber();
+            std::cout << "|" << " " << slots[i] << " ";
+        }
+        std::cout << "|";
+        std::cout << "\n";
+        for (int i = 0; i < 3; i++) {
+            std::cout << "  " << "-" << " ";
+        }
+        std::cout << "\n";
     }
 
     void showResult() {
-        std::cout << slots[0] << " " << slots[1] << " " << slots[2] << std::endl;
         int reward = calculateReward();
         if (reward > 0)
         {
@@ -87,7 +95,7 @@ int main() {
         }
     }
     
-    if (continueAfterDebt)
+    if (continueAfterDebt && wallet <=-1)
     {
         std::cout << "Time to work, did you think it would be that easy?" << std::endl;
         int debt = wallet;
