@@ -4,39 +4,48 @@
 
 int wallet = 1100;
 
-class SlotMachine {
+class SlotMachine 
+{
 private:
     int slots[3];
 
-    int randomNumber() {
+    int randomNumber() 
+    {
         return rand() % 7 + 2;
     }
-    int calculateReward() {
+    int calculateReward() 
+    {
         int a = slots[0], b = slots[1], c = slots[2];
-        if (a == b && b == c) {
+        if (a == b && b == c) 
+        {
             if (a == 7) return 100;
             if (a == 8) return 50;
             return 20;
         }
-        else if (a == b || a == c || b == c) {
+        else if (a == b || a == c || b == c) 
+        {
             return 5;
         }
         return 0;
     }
 public:
-    void spin() {
-        for (int i = 0; i < 3; i++) {
-            std::cout << "  " << "_" << " ";
+    void spin() 
+    {
+        for (int i = 0; i < 3; i++) 
+        {
+            std::cout << " ___";
         }
         std::cout << "\n";
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) 
+        {
             slots[i] = randomNumber();
             std::cout << "|" << " " << slots[i] << " ";
         }
         std::cout << "|";
         std::cout << "\n";
-        for (int i = 0; i < 3; i++) {
-            std::cout << "  " << "-" << " ";
+        for (int i = 0; i < 3; i++) 
+        {
+            std::cout << " ---";
         }
         std::cout << "\n";
     }
@@ -50,12 +59,24 @@ public:
         }
         else
         {
-            std::cout << "Loss" << std::endl;
+            for (int i = 0; i < 6; i++)
+            {
+                std::cout << " _";
+            }
+            std::cout << "\n";
+            std::cout << "|    Loss   |" << std::endl;
+            for (int i = 0; i < 6; i++)
+            {
+                std::cout << " _";
+            }
+            std::cout << "\n";
+//            std::cout << "Loss" << std::endl;
         }
     }
 };
 
-int main() {
+int main() 
+{
     srand(time(0));
     SlotMachine machine;
     bool continueAfterDebt = false;
